@@ -1,11 +1,10 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const { Client, Intents, Constants } = require('discord.js');
-
+const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const WOKCommands = require('wokcommands')
 const path = require('path')
-
 dotenv.config()
 const client = new Client({
     intents: [
@@ -14,12 +13,18 @@ const client = new Client({
         Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
     ],
 });
-client.on('ready', () => {
+
+client.on('ready', async () => {
+    // await mongoose.connect(process.env.MONGO_URI, {
+    //     keepAlive: true
+    // })
     new WOKCommands(client, {
         // The name of the local folder for your command files
         commandsDir: path.join(__dirname, 'commands'),
         // What guilds your slash commands will be created in
-        testServers: ['991960380005941328']
+        testServers: ['991960380005941328'],
+        mongoUri: process.env.MONGO_URI
+
     })
 })
 client.login(process.env.TOKEN);
