@@ -23,7 +23,7 @@ client.on('ready', async () => {
         commandsDir: path.join(__dirname, 'commands'),
         // What guilds your slash commands will be created in
         testServers: ['991960380005941328'],
-        mongoUri: process.env.MONGO_URI
+        // mongoUri: process.env.MONGO_URI
 
     })
 })
